@@ -13,6 +13,15 @@ const GET_ALL_CATEGORIES_QUERY = gql`
 `;
 
 export class CategoryComponent extends Component {
+  //pass the element displayed as a state to change when you click on it
+  state = {
+    selected: "all",
+  };
+
+  //the function which changes the selected state
+  handleChangeInPage = (e) => {
+    this.setState({ selected: e.target.textContent });
+  };
   render() {
     return (
       <nav className="navigation">
@@ -24,7 +33,10 @@ export class CategoryComponent extends Component {
               <Link
                 to={`/${category.name}`}
                 href="google.com"
-                className={index === 0 ? "selected" : ""}
+                onClick={this.handleChangeInPage}
+                className={
+                  category.name === this.state.selected ? "selected" : ""
+                }
               >
                 {category.name}
               </Link>
