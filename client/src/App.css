@@ -4,6 +4,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+body {
+  background: #eee;
+}
 
 :root {
   --black-clr: #1d1f22;
@@ -14,7 +17,7 @@
   display: grid;
   grid-template-columns: 30% 40% 30%;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem 0 2rem;
   /* height: 80px; */
 }
 .logo-container {
@@ -22,9 +25,7 @@
   justify-content: center;
   align-items: center;
 }
-.buy-actions {
-  text-align: right;
-}
+
 .navigation {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
@@ -39,4 +40,39 @@
 .selected {
   color: var(--selected-clr);
   border-bottom: 2px solid var(--selected-clr);
+}
+.buy-actions {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 20px;
+}
+
+.buy-actions button {
+  cursor: pointer;
+  color: var(--black-clr);
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+}
+.currency {
+  position: relative;
+}
+.currency-container {
+  position: absolute;
+  width: max-content;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-35%) translateY(5%);
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
+}
+.currency-container button {
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+}
+.currency-container button:hover {
+  background: #eee;
 }
