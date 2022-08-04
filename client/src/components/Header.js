@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import CategoryComponent from "./CategoryComponent";
+import logo from "../assets/images/a-logo.png";
+import BuyActions from "./BuyActions";
 
 export default class Header extends Component {
   render() {
     return (
-      <header>
+      <header className="header">
         <CategoryComponent />
+        <div className="logo-container">
+          <img src={logo} />
+        </div>
+        <BuyActions />
       </header>
     );
   }
