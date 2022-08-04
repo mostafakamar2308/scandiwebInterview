@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 body {
+  font-family: "Raleway", sans-serif;
   background: #eee;
 }
 
@@ -27,7 +28,6 @@ body {
 }
 
 .navigation {
-  font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   display: flex;
   justify-content: space-around;
