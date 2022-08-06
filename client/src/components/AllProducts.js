@@ -36,8 +36,8 @@ export class All extends Component {
                   title={product.name}
                   inStock={product.inStock}
                   image={product.gallery[0]}
-                  price={product.prices[0].amount}
-                  currency={product.prices[0].currency.symbol}
+                  price={product.prices[this.props.currency].amount}
+                  currency={product.prices[this.props.currency].currency.symbol}
                 />
               ));
             }}

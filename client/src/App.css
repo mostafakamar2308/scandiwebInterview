@@ -90,6 +90,9 @@ body {
   font-size: 2.5rem;
   color: var(--black-clr);
 }
+.ProductinStock {
+  cursor: pointer;
+}
 .ProductinStock:hover {
   background: #fff;
 }
@@ -97,8 +100,8 @@ body {
   width: 390px;
   height: 440px;
   padding: 1rem;
-  cursor: pointer;
   transition: 0.3s ease-in-out;
+  position: relative;
 }
 .out-ofStock {
   transform: rotate(45deg);
@@ -131,4 +134,25 @@ body {
 }
 .Productout-ofStock {
   opacity: 0.5;
+}
+.product-details {
+  position: relative;
+}
+.add-to-cart {
+  background: #5ece7b;
+  border-radius: 50%;
+  position: absolute;
+  padding: 0.8rem;
+  top: -30px;
+  right: 0;
+  border: none;
+  opacity: 0;
+  display: none;
+  transition: 0.5s opacity;
+  cursor: pointer;
+  /* margin-bottom: 1rem; */
+}
+.ProductinStock:hover .add-to-cart {
+  display: block;
+  opacity: 1;
 }

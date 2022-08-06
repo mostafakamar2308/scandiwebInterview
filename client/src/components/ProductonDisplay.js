@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import cart from "../assets/images/Empty Cart.png";
 
 export class ProductonDisplay extends Component {
   render() {
@@ -14,10 +15,15 @@ export class ProductonDisplay extends Component {
             "Out Of Stock"
           </h1>
         </div>
-        <h2>{this.props.title}</h2>
-        <h4>
-          {this.props.currency} {this.props.price}
-        </h4>
+        <div className="product-details">
+          <h2>{this.props.title}</h2>
+          <h4>
+            {this.props.currency} {this.props.price}
+          </h4>
+          <button className="add-to-cart">
+            <img src={cart}></img>
+          </button>
+        </div>
       </div>
     );
   }

@@ -16,7 +16,7 @@ const QUERY_CURRENCIES = gql`
 export class BuyActions extends Component {
   state = {
     currencyChangeOn: false,
-    currency: "$",
+    currencyIndex: this.props.currency,
   };
   render() {
     return (
@@ -27,7 +27,19 @@ export class BuyActions extends Component {
               this.setState({ currencyChangeOn: !this.state.currencyChangeOn })
             }
           >
-            {this.state.currency}
+            <Query query={QUERY_CURRENCIES}>
+              {({ data, loading }) => {
+                if (loading) return null;
+                const { currencies } = data;
+                const curr = currencies.filter((currency, index) => {
+                  if (index === this.state.currencyIndex) {
+                    return <span>{currency.symbol}</span>;
+                  }
+                });
+                console.log(curr[0].symbol);
+                return <span>{curr[0].symbol}</span>;
+              }}
+            </Query>
             <img
               src={this.state.currencyChangeOn ? upArrow : downArrow}
               alt="arrow"
@@ -39,12 +51,15 @@ export class BuyActions extends Component {
                 {({ data, loading }) => {
                   if (loading) return <button>Loading currencies</button>;
                   const { currencies } = data;
-                  return currencies.map((currency) => (
+                  return currencies.map((currency, index) => (
                     <button
-                      onClick={() => {
+                      id={index}
+                      onClick={(e) => {
+                        console.log(e.target);
+                        this.props.changeCurrency(e);
                         this.setState({
                           currencyChangeOn: !this.state.currencyChangeOn,
-                          currency: currency.symbol,
+                          currencyIndex: index,
                         });
                       }}
                     >

@@ -11,7 +11,11 @@ export default class Header extends Component {
         <div className="logo-container">
           <img src={logo} />
         </div>
-        <BuyActions />
+        <BuyActions
+          cart={this.props.cart}
+          currency={this.props.currency}
+          changeCurrency={this.props.changeCurrency}
+        />
       </header>
     );
   }
