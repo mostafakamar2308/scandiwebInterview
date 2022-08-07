@@ -36,7 +36,6 @@ export class BuyActions extends Component {
                     return <span>{currency.symbol}</span>;
                   }
                 });
-                console.log(curr[0].symbol);
                 return <span>{curr[0].symbol}</span>;
               }}
             </Query>

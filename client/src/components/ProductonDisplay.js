@@ -15,12 +15,16 @@ export class ProductonDisplay extends Component {
             "Out Of Stock"
           </h1>
         </div>
-        <div className="product-details">
+        <div className="product-details" id={this.props.id}>
           <h2>{this.props.title}</h2>
           <h4>
             {this.props.currency} {this.props.price}
           </h4>
-          <button className="add-to-cart">
+          <button
+            className="add-to-cart"
+            onClick={this.props.add}
+            id={this.props.id}
+          >
             <img src={cart}></img>
           </button>
         </div>

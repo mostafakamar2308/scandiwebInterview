@@ -171,6 +171,9 @@ body {
 }
 .cart {
   background: #fff;
-  position: absolute;
-  right: 10%;
+  position: fixed;
+  width: 325px;
+  min-height: 680px;
+  padding: 1rem;
+  right: 3%;
 }

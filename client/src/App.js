@@ -23,15 +23,44 @@ class App extends Component {
     super(props);
     this.onCurrencyChange = this.onCurrencyChange.bind(this);
     this.onCartDisplay = this.onCartDisplay.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
   state = {
     currency: 0,
-    cartDisplay: true,
-    cart: {},
+    cartDisplay: false,
+    cart: [
+      {
+        id: "jacket-canada-goosee",
+        amount: 1,
+      },
+    ],
   };
 
   onCurrencyChange(e) {
     this.setState({ ...this.state, currency: Number(e.target.id) });
+  }
+  addToCart(e) {
+    let addedItemId = e.target.parentNode.id;
+    console.log(e.target.parentNode.id);
+    let cartContainItem = this.state.cart.filter(
+      (ele) => ele.id === addedItemId
+    );
+    console.log(cartContainItem);
+    if (cartContainItem.length > 0) {
+      this.setState({
+        ...this.state,
+        cart: [
+          ...this.state.cart.filter((ele) => ele.id !== addedItemId),
+          { id: addedItemId, amount: cartContainItem[0].amount + 1 },
+        ],
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        cart: [...this.state.cart, { id: addedItemId, amount: 1 }],
+      });
+    }
+    console.log(this.state);
   }
   onCartDisplay(e) {
     if (
@@ -63,6 +92,7 @@ class App extends Component {
                   currency={this.state.currency}
                   changeCartDisplay={this.onCartDisplay}
                   cartDisplay={this.state.cartDisplay}
+                  addToCart={this.addToCart}
                 />
               }
             />
@@ -70,7 +100,12 @@ class App extends Component {
               exact
               path="/tech"
               element={
-                <Tech cart={this.state.cart} currency={this.state.currency} />
+                <Tech
+                  cart={this.state.cart}
+                  currency={this.state.currency}
+                  changeCartDisplay={this.onCartDisplay}
+                  cartDisplay={this.state.cartDisplay}
+                />
               }
             />
             <Route
@@ -80,6 +115,8 @@ class App extends Component {
                 <Clothes
                   cart={this.state.cart}
                   currency={this.state.currency}
+                  changeCartDisplay={this.onCartDisplay}
+                  cartDisplay={this.state.cartDisplay}
                 />
               }
             />

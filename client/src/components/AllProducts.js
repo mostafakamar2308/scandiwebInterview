@@ -8,6 +8,7 @@ const GET_ALL_PRODUCTS = gql`
     category(input: { title: "all" }) {
       name
       products {
+        id
         name
         inStock
         gallery
@@ -38,6 +39,8 @@ export class All extends Component {
               const { category } = data;
               return category.products.map((product) => (
                 <ProductonDisplay
+                  id={product.id}
+                  add={this.props.addToCart}
                   title={product.name}
                   inStock={product.inStock}
                   image={product.gallery[0]}

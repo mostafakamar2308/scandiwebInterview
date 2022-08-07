@@ -10,6 +10,7 @@ const GET_TECH_PRODUCTS = gql`
       name
       products {
         name
+        id
         inStock
         gallery
         prices {
@@ -27,7 +28,10 @@ export class Tech extends Component {
   render() {
     return (
       <div className="All-container product-container">
-        <CartDisplay />
+        <CartDisplay
+          display={this.props.cartDisplay}
+          changeCartDisplay={this.props.changeCartDisplay}
+        />{" "}
         <h1>Tech</h1>
         <div className="products">
           <Query query={GET_TECH_PRODUCTS}>
@@ -38,6 +42,7 @@ export class Tech extends Component {
                 <ProductonDisplay
                   title={product.name}
                   inStock={product.inStock}
+                  id={product.id}
                   image={product.gallery[0]}
                   price={product.prices[this.props.currency].amount}
                   currency={product.prices[this.props.currency].currency.symbol}
