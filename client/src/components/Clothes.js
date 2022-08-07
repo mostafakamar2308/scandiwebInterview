@@ -40,6 +40,7 @@ export class Clothes extends Component {
               return category.products.map((product) => (
                 <ProductonDisplay
                   title={product.name}
+                  add={this.props.addToCart}
                   inStock={product.inStock}
                   id={product.id}
                   image={product.gallery[0]}

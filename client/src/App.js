@@ -104,6 +104,7 @@ class App extends Component {
                   cart={this.state.cart}
                   currency={this.state.currency}
                   changeCartDisplay={this.onCartDisplay}
+                  addToCart={this.addToCart}
                   cartDisplay={this.state.cartDisplay}
                 />
               }
@@ -116,6 +117,7 @@ class App extends Component {
                   cart={this.state.cart}
                   currency={this.state.currency}
                   changeCartDisplay={this.onCartDisplay}
+                  addToCart={this.addToCart}
                   cartDisplay={this.state.cartDisplay}
                 />
               }
