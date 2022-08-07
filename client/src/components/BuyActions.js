@@ -71,7 +71,7 @@ export class BuyActions extends Component {
             </div>
           )}
         </div>
-        <button>
+        <button className="cart-btn" onClick={this.props.cartDisplay}>
           <img src={cart}></img>
         </button>
       </div>

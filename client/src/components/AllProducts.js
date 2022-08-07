@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { Query } from "@apollo/client/react/components";
 import React, { Component } from "react";
+import CartDisplay from "./CartDisplay";
 import ProductonDisplay from "./ProductonDisplay";
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts {
@@ -25,6 +26,10 @@ export class All extends Component {
   render() {
     return (
       <div className="All-container product-container">
+        <CartDisplay
+          display={this.props.cartDisplay}
+          changeCartDisplay={this.props.changeCartDisplay}
+        />
         <h1>All</h1>
         <div className="products">
           <Query query={GET_ALL_PRODUCTS}>

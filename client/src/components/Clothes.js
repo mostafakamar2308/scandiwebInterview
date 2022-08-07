@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import { Query } from "@apollo/client/react/components";
 import ProductonDisplay from "./ProductonDisplay";
+import CartDisplay from "./CartDisplay";
 
 const GET_CLOTHES_PRODUCTS = gql`
   query getAllProducts {
@@ -25,6 +26,7 @@ export class Clothes extends Component {
   render() {
     return (
       <div className="All-container product-container">
+        <CartDisplay />
         <h1>Clothes</h1>
         <div className="products">
           <Query query={GET_CLOTHES_PRODUCTS}>

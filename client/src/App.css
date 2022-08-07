@@ -79,11 +79,14 @@ body {
   background: #eee;
 }
 .product-container {
+}
+.product-container > h1 {
   padding: 30px;
 }
 .products {
   display: flex;
   flex-wrap: wrap;
+  padding: 30px;
 }
 .product-container > h1 {
   text-transform: uppercase;
@@ -155,4 +158,19 @@ body {
 .ProductinStock:hover .add-to-cart {
   display: block;
   opacity: 1;
+}
+.product-container {
+  position: relative;
+}
+.cartContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #000a;
+  z-index: 1000;
+}
+.cart {
+  background: #fff;
+  position: absolute;
+  right: 10%;
 }

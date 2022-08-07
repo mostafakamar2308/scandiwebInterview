@@ -22,14 +22,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.onCurrencyChange = this.onCurrencyChange.bind(this);
+    this.onCartDisplay = this.onCartDisplay.bind(this);
   }
   state = {
     currency: 0,
+    cartDisplay: true,
     cart: {},
   };
 
   onCurrencyChange(e) {
     this.setState({ ...this.state, currency: Number(e.target.id) });
+  }
+  onCartDisplay(e) {
+    if (
+      e.target.className === "cartContainer" ||
+      e.target.className === "cart-btn" ||
+      e.target.parentNode.className === "cart-btn"
+    ) {
+      this.setState({ ...this.state, cartDisplay: !this.state.cartDisplay });
+    }
   }
   render() {
     return (
@@ -39,6 +50,7 @@ class App extends Component {
             currency={this.state.currency}
             cart={this.state.cart}
             changeCurrency={this.onCurrencyChange}
+            cartDisplay={this.onCartDisplay}
           />
           <Routes>
             <Route exact path="/" element={<Navigate replace to="/all" />} />
@@ -46,7 +58,12 @@ class App extends Component {
               exact
               path="/all"
               element={
-                <All cart={this.state.cart} currency={this.state.currency} />
+                <All
+                  cart={this.state.cart}
+                  currency={this.state.currency}
+                  changeCartDisplay={this.onCartDisplay}
+                  cartDisplay={this.state.cartDisplay}
+                />
               }
             />
             <Route

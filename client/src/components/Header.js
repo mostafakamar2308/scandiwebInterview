@@ -15,6 +15,7 @@ export default class Header extends Component {
           cart={this.props.cart}
           currency={this.props.currency}
           changeCurrency={this.props.changeCurrency}
+          cartDisplay={this.props.cartDisplay}
         />
       </header>
     );
