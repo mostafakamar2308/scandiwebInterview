@@ -28,12 +28,7 @@ class App extends Component {
   state = {
     currency: 0,
     cartDisplay: false,
-    cart: [
-      {
-        id: "jacket-canada-goosee",
-        amount: 1,
-      },
-    ],
+    cart: [],
   };
 
   onCurrencyChange(e) {

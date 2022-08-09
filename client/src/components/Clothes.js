@@ -28,6 +28,7 @@ export class Clothes extends Component {
     return (
       <div className="All-container product-container">
         <CartDisplay
+          cart={this.props.cart}
           display={this.props.cartDisplay}
           changeCartDisplay={this.props.changeCartDisplay}
         />{" "}
