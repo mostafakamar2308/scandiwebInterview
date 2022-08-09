@@ -24,6 +24,7 @@ class App extends Component {
     this.onCurrencyChange = this.onCurrencyChange.bind(this);
     this.onCartDisplay = this.onCartDisplay.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
   state = {
     currency: 0,
@@ -35,7 +36,7 @@ class App extends Component {
     this.setState({ ...this.state, currency: Number(e.target.id) });
   }
   addToCart(e) {
-    let addedItemId = e.target.parentNode.id;
+    let addedItemId = e.target.id || e.target.parentNode.id;
     console.log(e.target.parentNode.id);
     let cartContainItem = this.state.cart.filter(
       (ele) => ele.id === addedItemId
@@ -57,6 +58,29 @@ class App extends Component {
     }
     console.log(this.state);
   }
+
+  removeItem(e) {
+    let removedItemId = e.target.id || e.target.parentNode.id;
+    let cartContainItem = this.state.cart.filter(
+      (ele) => ele.id === removedItemId
+    );
+    if (cartContainItem[0].amount > 1) {
+      this.setState({
+        ...this.state,
+        cart: [
+          ...this.state.cart.filter((ele) => ele.id !== removedItemId),
+          { id: removedItemId, amount: cartContainItem[0].amount - 1 },
+        ],
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        cart: [...this.state.cart.filter((ele) => ele.id !== removedItemId)],
+      });
+    }
+    console.log(this.state);
+  }
+
   onCartDisplay(e) {
     if (
       e.target.className === "cartContainer" ||
@@ -88,6 +112,7 @@ class App extends Component {
                   changeCartDisplay={this.onCartDisplay}
                   cartDisplay={this.state.cartDisplay}
                   addToCart={this.addToCart}
+                  removeFromCart={this.removeItem}
                 />
               }
             />

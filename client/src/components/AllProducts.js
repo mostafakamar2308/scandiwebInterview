@@ -31,6 +31,8 @@ export class All extends Component {
           cart={this.props.cart}
           display={this.props.cartDisplay}
           changeCartDisplay={this.props.changeCartDisplay}
+          add={this.props.addToCart}
+          remove={this.props.removeFromCart}
         />
         <h1>All</h1>
         <div className="products">

@@ -13,7 +13,6 @@ export class CartDisplay extends Component {
               <h1>My Bag: </h1>
               <h3>{this.props.cart.length} items</h3>
             </div>
-            <hr />
             {this.props.cart.map((ele) => {
               const query = gql`
                 query getProduct {
@@ -46,12 +45,15 @@ export class CartDisplay extends Component {
                     return (
                       <>
                         <ProductInCart
+                          add={this.props.add}
+                          remove={this.props.remove}
+                          id={ele.id}
                           name={product.name}
                           currency={product.prices[0].currency.symbol}
                           price={product.prices[0].amount}
                           attr={product.attributes}
                           image={product.gallery[0]}
-                          amount={1}
+                          amount={ele.amount}
                         />
                         <hr />
                       </>

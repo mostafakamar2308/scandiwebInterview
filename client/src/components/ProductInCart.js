@@ -34,9 +34,13 @@ export class ProductInCart extends Component {
           })}
         </div>
         <div className="product-actions">
-          <button>+</button>
+          <button id={this.props.id} onClick={this.props.add}>
+            +
+          </button>
           <div>{this.props.amount}</div>
-          <button>-</button>
+          <button id={this.props.id} onClick={this.props.remove}>
+            -
+          </button>
         </div>
         <div className="product-Image">
           <img src={this.props.image} alt={this.props.name} />
