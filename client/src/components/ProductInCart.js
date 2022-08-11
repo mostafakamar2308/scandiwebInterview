@@ -12,7 +12,7 @@ export class ProductInCart extends Component {
           </h3>
           {this.props.attr.map((ele) => {
             return (
-              <div className="product-attr">
+              <div className="product-attr" key={ele.name}>
                 <div className="attr-name">{ele.name}</div>
                 <div className="attr-items">
                   {ele.name === "Color"

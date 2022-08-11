@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import { Query } from "@apollo/client/react/components";
 import ProductInCart from "./ProductInCart";
+import TotalAmount from "./TotalAmount";
 
 export class CartDisplay extends Component {
   render() {
@@ -37,7 +38,7 @@ export class CartDisplay extends Component {
                 }
               `;
               return (
-                <Query query={query}>
+                <Query query={query} key={ele.id}>
                   {({ loading, error, data }) => {
                     if (loading) return null;
                     if (error) return console.log(error);
@@ -62,6 +63,10 @@ export class CartDisplay extends Component {
                 </Query>
               );
             })}
+            <hr></hr>
+            <div className="cart-amount">
+              <TotalAmount cart={this.props.cart} />
+            </div>
           </div>
         </div>
       );

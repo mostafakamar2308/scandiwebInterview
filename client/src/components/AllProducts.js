@@ -3,6 +3,7 @@ import { Query } from "@apollo/client/react/components";
 import React, { Component } from "react";
 import CartDisplay from "./CartDisplay";
 import ProductonDisplay from "./ProductonDisplay";
+import { Route, Routes } from "react-router";
 const GET_ALL_PRODUCTS = gql`
   query getAllProducts {
     category(input: { title: "all" }) {

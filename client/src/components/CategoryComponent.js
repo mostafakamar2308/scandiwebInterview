@@ -27,12 +27,12 @@ export class CategoryComponent extends Component {
       <nav className="navigation">
         <Query query={GET_ALL_CATEGORIES_QUERY}>
           {({ loading, error, data }) => {
-            if (loading) return <p>Loading products</p>;
+            if (loading) return <p>Loading Categories</p>;
             const { categories } = data;
             return categories.map((category, index) => (
               <Link
                 to={`/${category.name}`}
-                href="google.com"
+                key={index}
                 onClick={this.handleChangeInPage}
                 className={
                   category.name === this.state.selected ? "selected" : ""

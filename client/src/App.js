@@ -13,6 +13,7 @@ import All from "./components/AllProducts";
 import Tech from "./components/Tech";
 import Clothes from "./components/Clothes";
 import { Component } from "react";
+import ProductPage from "./components/ProductPage";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -104,7 +105,7 @@ class App extends Component {
             <Route exact path="/" element={<Navigate replace to="/all" />} />
             <Route
               exact
-              path="/all"
+              path="/all/*"
               element={
                 <All
                   cart={this.state.cart}
@@ -141,6 +142,22 @@ class App extends Component {
                   cartDisplay={this.state.cartDisplay}
                 />
               }
+            />
+            <Route
+              exact
+              path={`/:id`}
+              // element={
+              // <ProductonDisplay
+              //   id={product.id}
+              //   add={this.props.addToCart}
+              //   title={product.name}
+              //   inStock={product.inStock}
+              //   image={product.gallery[0]}
+              //   price={product.prices[this.props.currency].amount}
+              //   currency={product.prices[this.props.currency].currency.symbol}
+              // />
+              // }
+              element={<ProductPage />}
             />
           </Routes>
         </Router>
