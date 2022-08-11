@@ -146,18 +146,15 @@ class App extends Component {
             <Route
               exact
               path={`/:id`}
-              // element={
-              // <ProductonDisplay
-              //   id={product.id}
-              //   add={this.props.addToCart}
-              //   title={product.name}
-              //   inStock={product.inStock}
-              //   image={product.gallery[0]}
-              //   price={product.prices[this.props.currency].amount}
-              //   currency={product.prices[this.props.currency].currency.symbol}
-              // />
-              // }
-              element={<ProductPage />}
+              element={
+                <ProductPage
+                  cart={this.state.cart}
+                  cartDisplay={this.state.cartDisplay}
+                  changeCartDisplay={this.onCartDisplay}
+                  addToCart={this.addToCart}
+                  remove={this.removeItem}
+                />
+              }
             />
           </Routes>
         </Router>
