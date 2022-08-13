@@ -27,13 +27,18 @@ export class All extends Component {
   render() {
     return (
       <div className="All-container product-container">
-        <CartDisplay
-          cart={this.props.cart}
-          display={this.props.cartDisplay}
-          changeCartDisplay={this.props.changeCartDisplay}
-          add={this.props.addToCart}
-          remove={this.props.removeFromCart}
-        />
+        {this.props.cartDisplay && (
+          <div className="cartContainer" onClick={this.props.changeCartDisplay}>
+            <CartDisplay
+              cart={this.props.cart}
+              display={this.props.cartDisplay}
+              changeCartDisplay={this.props.changeCartDisplay}
+              add={this.props.addToCart}
+              remove={this.props.removeFromCart}
+              currency={this.props.currency}
+            />
+          </div>
+        )}
         <h1>All</h1>
         <div className="products">
           <Query query={GET_ALL_PRODUCTS}>

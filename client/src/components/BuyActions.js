@@ -72,7 +72,9 @@ export class BuyActions extends Component {
         </div>
         <button className="cart-btn" onClick={this.props.cartDisplay}>
           <img src={cart}></img>
-          <span className="item-numb">{this.props.cart.length}</span>
+          <span className="item-numb">
+            {this.props.cart.reduce((pre, cur) => pre + cur.amount, 0)}
+          </span>
         </button>
       </div>
     );

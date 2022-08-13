@@ -8,14 +8,15 @@ export class CartDisplay extends Component {
   render() {
     if (this.props.display) {
       return (
-        <div className="cartContainer" onClick={this.props.changeCartDisplay}>
-          <div className="cart">
-            <div className="cart-details">
-              <h1>My Bag: </h1>
-              <h3>{this.props.cart.length} items</h3>
-            </div>
-            {this.props.cart.map((ele) => {
-              const query = gql`
+        <div className="cart">
+          <div className="cart-details">
+            <h1>My Bag: </h1>
+            <h3>
+              {this.props.cart.reduce((pre, cur) => pre + cur.amount, 0)} items
+            </h3>
+          </div>
+          {this.props.cart.map((ele) => {
+            const query = gql`
                 query getProduct {
                   product(id: "${ele.id}") {
                     name
@@ -37,36 +38,40 @@ export class CartDisplay extends Component {
                   }
                 }
               `;
-              return (
-                <Query query={query} key={ele.id}>
-                  {({ loading, error, data }) => {
-                    if (loading) return null;
-                    if (error) return console.log(error);
-                    const { product } = data;
-                    return (
-                      <>
-                        <ProductInCart
-                          add={this.props.add}
-                          remove={this.props.remove}
-                          id={ele.id}
-                          name={product.name}
-                          currency={product.prices[0].currency.symbol}
-                          price={product.prices[0].amount}
-                          attr={product.attributes}
-                          image={product.gallery[0]}
-                          amount={ele.amount}
-                        />
-                        <hr />
-                      </>
-                    );
-                  }}
-                </Query>
-              );
-            })}
-            <hr></hr>
-            <div className="cart-amount">
-              <TotalAmount cart={this.props.cart} />
-            </div>
+            return (
+              <Query query={query} key={ele.id}>
+                {({ loading, error, data }) => {
+                  if (loading) return null;
+                  if (error) return console.log(error);
+                  const { product } = data;
+                  return (
+                    <>
+                      <ProductInCart
+                        add={this.props.add}
+                        remove={this.props.remove}
+                        id={ele.id}
+                        name={product.name}
+                        currency={
+                          product.prices[this.props.currency].currency.symbol
+                        }
+                        price={product.prices[this.props.currency].amount}
+                        attr={product.attributes}
+                        image={product.gallery[0]}
+                        amount={ele.amount}
+                      />
+                      <hr />
+                    </>
+                  );
+                }}
+              </Query>
+            );
+          })}
+          <hr></hr>
+          <div className="cart-amount">
+            <TotalAmount
+              cart={this.props.cart}
+              currency={this.props.currency}
+            />
           </div>
         </div>
       );

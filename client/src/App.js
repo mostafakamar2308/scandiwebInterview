@@ -38,12 +38,11 @@ class App extends Component {
   }
   addToCart(e) {
     let addedItemId = e.target.id || e.target.parentNode.id;
-    console.log(e.target.parentNode.id);
     let cartContainItem = this.state.cart.filter(
       (ele) => ele.id === addedItemId
     );
-    console.log(cartContainItem);
     if (cartContainItem.length > 0) {
+      console.log(this.state.cart);
       this.setState({
         ...this.state,
         cart: [
@@ -57,7 +56,6 @@ class App extends Component {
         cart: [...this.state.cart, { id: addedItemId, amount: 1 }],
       });
     }
-    console.log(this.state);
   }
 
   removeItem(e) {
@@ -125,8 +123,9 @@ class App extends Component {
                   cart={this.state.cart}
                   currency={this.state.currency}
                   changeCartDisplay={this.onCartDisplay}
-                  addToCart={this.addToCart}
                   cartDisplay={this.state.cartDisplay}
+                  addToCart={this.addToCart}
+                  removeFromCart={this.removeItem}
                 />
               }
             />
@@ -138,8 +137,9 @@ class App extends Component {
                   cart={this.state.cart}
                   currency={this.state.currency}
                   changeCartDisplay={this.onCartDisplay}
-                  addToCart={this.addToCart}
                   cartDisplay={this.state.cartDisplay}
+                  addToCart={this.addToCart}
+                  removeFromCart={this.removeItem}
                 />
               }
             />
@@ -153,6 +153,7 @@ class App extends Component {
                   changeCartDisplay={this.onCartDisplay}
                   addToCart={this.addToCart}
                   remove={this.removeItem}
+                  currency={this.state.currency}
                 />
               }
             />

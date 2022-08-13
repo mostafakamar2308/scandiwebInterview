@@ -67,7 +67,7 @@ body {
   display: flex;
   flex-direction: column;
   transform: translateX(-35%) translateY(5%);
-  z-index: 5;
+  z-index: 999999;
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
 }
 .currency-container button {
@@ -94,9 +94,7 @@ body {
   font-size: 2.5rem;
   color: var(--black-clr);
 }
-.ProductinStock {
-  cursor: pointer;
-}
+
 .ProductinStock:hover {
   background: #fff;
 }
@@ -106,6 +104,10 @@ body {
   padding: 1rem;
   transition: 0.3s ease-in-out;
   position: relative;
+  border-radius: 20px;
+}
+.product:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.39);
 }
 .out-ofStock {
   transform: rotate(45deg);

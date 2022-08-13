@@ -45,13 +45,18 @@ export class ProductPage extends Component {
   render() {
     return (
       <div className="product-container">
-        <CartDisplay
-          cart={this.props.cart}
-          display={this.props.cartDisplay}
-          changeCartDisplay={this.props.changeCartDisplay}
-          add={this.props.addToCart}
-          remove={this.props.remove}
-        />
+        {this.props.cartDisplay && (
+          <div className="cartContainer" onClick={this.props.changeCartDisplay}>
+            <CartDisplay
+              cart={this.props.cart}
+              display={this.props.cartDisplay}
+              changeCartDisplay={this.props.changeCartDisplay}
+              add={this.props.addToCart}
+              remove={this.props.removeFromCart}
+              currency={this.props.currency}
+            />
+          </div>
+        )}
         <div className="product-page">
           <div className="image-container">
             <div className="images">
@@ -108,9 +113,10 @@ export class ProductPage extends Component {
               <h3>Price</h3>
               <h2>
                 {this.state.product.prices &&
-                  this.state.product.prices[0].currency.symbol}
+                  this.state.product.prices[this.props.currency].currency
+                    .symbol}
                 {this.state.product.prices &&
-                  this.state.product.prices[0].amount}
+                  this.state.product.prices[this.props.currency].amount}
               </h2>
             </div>
             {this.state.product.inStock ? (
