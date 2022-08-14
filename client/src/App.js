@@ -14,6 +14,7 @@ import Tech from "./components/Tech";
 import Clothes from "./components/Clothes";
 import { Component } from "react";
 import ProductPage from "./components/ProductPage";
+import Cart from "./components/Cart";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -140,6 +141,19 @@ class App extends Component {
                   cartDisplay={this.state.cartDisplay}
                   addToCart={this.addToCart}
                   removeFromCart={this.removeItem}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/cart"
+              element={
+                <Cart
+                  cart={this.state.cart}
+                  display={this.state.cartDisplay}
+                  add={this.addToCart}
+                  remove={this.removeItem}
+                  currency={this.state.currency}
                 />
               }
             />

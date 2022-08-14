@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 import { Query } from "@apollo/client/react/components";
 import ProductInCart from "./ProductInCart";
 import TotalAmount from "./TotalAmount";
+import { Link } from "react-router-dom";
 
 export class CartDisplay extends Component {
   render() {
@@ -59,19 +60,21 @@ export class CartDisplay extends Component {
                         image={product.gallery[0]}
                         amount={ele.amount}
                       />
-                      <hr />
                     </>
                   );
                 }}
               </Query>
             );
           })}
-          <hr></hr>
           <div className="cart-amount">
             <TotalAmount
               cart={this.props.cart}
               currency={this.props.currency}
             />
+          </div>
+          <div className="cart-actions">
+            <Link to={"/cart"}>VIEW CART</Link>
+            <button>CHECK OUT</button>
           </div>
         </div>
       );

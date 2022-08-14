@@ -2,20 +2,23 @@ import { gql } from "@apollo/client";
 import { request } from "graphql-request";
 import React, { Component } from "react";
 
+const queryOfCur = gql`
+  query getAllProducts {
+    currencies {
+      symbol
+    }
+  }
+`;
 export class TotalAmount extends Component {
   constructor(props) {
     super(props);
     this.total = this.total.bind(this);
   }
-  compareArrays(array1, array2) {
-    return (
-      array1.length === array2.length &&
-      array1.every((el) => array2.includes(el))
-    );
-  }
+
   state = {
     cart: this.props.cart,
     totalAmount: [],
+    currencySymbol: "$",
   };
 
   componentDidMount() {
@@ -69,20 +72,29 @@ export class TotalAmount extends Component {
     //   }}
     // </Query>;
   }
-
   render() {
     return (
-      <div>
+      <>
         <h3>Total</h3>
         {/* <p>{this.state.totalArr.reduce((pre, cur) => pre + cur, 0)}</p> */}
-        <p>
+        <p className="amount">
           {this.state.cart.length > 0
-            ? this.state.totalAmount
-                .reduce((pre, cur) => pre + cur, 0)
-                .toFixed(2)
+            ? (
+                Number(
+                  this.state.totalAmount
+                    .reduce((pre, cur) => pre + cur, 0)
+                    .toFixed(2)
+                ) +
+                0.21 *
+                  Number(
+                    this.state.totalAmount
+                      .reduce((pre, cur) => pre + cur, 0)
+                      .toFixed(2)
+                  )
+              ).toFixed(2)
             : 0}
         </p>
-      </div>
+      </>
     );
   }
 }

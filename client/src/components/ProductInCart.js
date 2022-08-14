@@ -5,11 +5,13 @@ export class ProductInCart extends Component {
     return (
       <div className="product-in-cart">
         <div className="product-info">
-          <h1 className="product-title">{this.props.name}</h1>
-          <h3 className="product-price">
-            {this.props.currency}
-            {this.props.price}
-          </h3>
+          <div>
+            <h1 className="product-title">{this.props.name}</h1>
+            <h3 className="product-price">
+              {this.props.currency}
+              {this.props.price}
+            </h3>
+          </div>
           {this.props.attr.map((ele) => {
             return (
               <div className="product-attr" key={ele.name}>
