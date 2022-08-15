@@ -1,4 +1,4 @@
-# scandiwebInterview
+# scandiweb Interview test by Mostafa Kamar
 
 This is a website for Scandi Web, made by React JS. I followed the figma design they provided me. and that is the result :smile:
 
