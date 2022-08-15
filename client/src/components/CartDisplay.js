@@ -44,10 +44,18 @@ export class CartDisplay extends Component {
                 {({ loading, error, data }) => {
                   if (loading) return null;
                   if (error) return console.log(error);
+                  console.log(
+                    this.props.cart.filter((product) => product.id === ele.id)
+                  );
                   const { product } = data;
                   return (
                     <>
                       <ProductInCart
+                        cart={
+                          this.props.cart.filter(
+                            (product) => product.id === ele.id
+                          )[0]
+                        }
                         add={this.props.add}
                         remove={this.props.remove}
                         id={ele.id}
@@ -55,6 +63,7 @@ export class CartDisplay extends Component {
                         currency={
                           product.prices[this.props.currency].currency.symbol
                         }
+                        changeCartAttr={this.props.changeCartAttr}
                         price={product.prices[this.props.currency].amount}
                         attr={product.attributes}
                         image={product.gallery[0]}

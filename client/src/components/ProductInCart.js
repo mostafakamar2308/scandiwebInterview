@@ -1,6 +1,28 @@
 import React, { Component } from "react";
 
 export class ProductInCart extends Component {
+  state = {
+    selectedAttr: [
+      ...this.props.cart.attr.map((ele) => {
+        return { name: ele.name || ele.id, value: ele.value };
+      }),
+    ],
+  };
+  changeAttr(id, changedAttr) {
+    let newAttrs = [
+      ...this.state.selectedAttr.map((attr) => {
+        if (attr.name === changedAttr) {
+          return { name: changedAttr, value: id };
+        }
+        return attr;
+      }),
+    ];
+    this.props.changeCartAttr(newAttrs);
+    this.setState({
+      ...this.state,
+      selectedAttr: newAttrs,
+    });
+  }
   render() {
     return (
       <div className="product-in-cart">
@@ -12,24 +34,41 @@ export class ProductInCart extends Component {
               {this.props.price}
             </h3>
           </div>
-          {this.props.attr.map((ele) => {
+          {this.props.attr.map((ele, attrIndex) => {
             return (
               <div className="product-attr" key={ele.name}>
                 <div className="attr-name">{ele.name}</div>
                 <div className="attr-items">
                   {ele.name === "Color"
-                    ? ele.items.map((ele) => (
+                    ? ele.items.map((elem, index) => (
                         <button
-                          className="attr-value"
-                          id={ele.value}
-                          style={{ background: ele.value }}
+                          className={`attr-value ${
+                            this.state.selectedAttr[attrIndex].value ===
+                              elem.value && "selected-color"
+                          }`}
+                          id={elem.value}
+                          onClick={(e) =>
+                            this.changeAttr(e.target.id, ele.name)
+                          }
+                          style={{ background: elem.value }}
                         ></button>
                       ))
-                    : ele.items.map((ele) => (
-                        <button className="attr-value" id={ele.value}>
-                          {ele.value}
-                        </button>
-                      ))}
+                    : ele.items.map((elem, index) => {
+                        return (
+                          <button
+                            className={`attr-value ${
+                              this.state.selectedAttr[attrIndex].value ===
+                                elem.value && "selected-attr"
+                            }`}
+                            onClick={(e) =>
+                              this.changeAttr(e.target.id, ele.name)
+                            }
+                            id={elem.value}
+                          >
+                            {elem.value}
+                          </button>
+                        );
+                      })}
                 </div>
               </div>
             );
@@ -46,6 +85,10 @@ export class ProductInCart extends Component {
         </div>
         <div className="product-Image">
           <img src={this.props.image} alt={this.props.name} />
+          <div className="product-Image-actions">
+            <button onClick={this.props.prevImage}>{"<"}</button>
+            <button onClick={this.props.nextImage}>{">"}</button>
+          </div>
         </div>
       </div>
     );

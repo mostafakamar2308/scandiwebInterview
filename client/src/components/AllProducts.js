@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, throwServerError } from "@apollo/client";
 import { Query } from "@apollo/client/react/components";
 import React, { Component } from "react";
 import CartDisplay from "./CartDisplay";
@@ -32,6 +32,7 @@ export class All extends Component {
             <CartDisplay
               cart={this.props.cart}
               display={this.props.cartDisplay}
+              changeCartAttr={this.props.changeCartAttr}
               changeCartDisplay={this.props.changeCartDisplay}
               add={this.props.addToCart}
               remove={this.props.removeFromCart}

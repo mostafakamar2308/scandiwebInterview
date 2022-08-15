@@ -5,7 +5,12 @@ import CartDisplay from "./CartDisplay";
 import parse from "html-react-parser";
 
 export class ProductPage extends Component {
-  state = { product: {}, selectedImage: 0 };
+  state = {
+    product: {},
+    selectedImage: 0,
+    selectedAttr: [],
+  };
+
   componentDidMount() {
     const path = window.location.pathname;
     const query = gql`
@@ -38,7 +43,30 @@ export class ProductPage extends Component {
     request("http://localhost:4000/graphql", query).then((data) => {
       console.log(data);
       const { product } = data;
-      this.setState({ product: product });
+      this.setState({
+        ...this.state,
+        product: product,
+        selectedAttr: [
+          ...product.attributes.map((ele) => {
+            return { name: ele.name, value: ele.items[0].value };
+          }),
+        ],
+      });
+    });
+  }
+  changeAttr(id, changedAttr) {
+    let newAttr = [
+      ...this.state.selectedAttr.map((attr) => {
+        if (attr.name === changedAttr) {
+          return { name: changedAttr, value: id };
+        }
+        return attr;
+      }),
+    ];
+    this.props.changeCartAttr(newAttr);
+    this.setState({
+      ...this.state,
+      selectedAttr: newAttr,
     });
   }
 
@@ -87,22 +115,37 @@ export class ProductPage extends Component {
             <h1>{this.state.product.name}</h1>
             <p>{this.state.product.brand}</p>
             {this.state.product.attributes &&
-              this.state.product.attributes.map((ele) => {
+              this.state.product.attributes.map((ele, attrIndex) => {
                 return (
                   <div className="product-attr" key={ele.name}>
                     <div className="attr-name">{ele.name}</div>
                     <div className="attr-items">
                       {ele.name === "Color"
-                        ? ele.items.map((ele) => (
+                        ? ele.items.map((elem, index) => (
                             <button
-                              className="attr-value"
-                              id={ele.value}
-                              style={{ background: ele.value }}
+                              className={`attr-color ${
+                                this.state.selectedAttr[attrIndex].value ===
+                                  elem.value && "selected-color"
+                              }`}
+                              id={elem.value}
+                              onClick={(e) =>
+                                this.changeAttr(e.target.id, ele.name)
+                              }
+                              style={{ background: elem.value }}
                             ></button>
                           ))
-                        : ele.items.map((ele) => (
-                            <button className="attr-value" id={ele.value}>
-                              {ele.value}
+                        : ele.items.map((elem, index) => (
+                            <button
+                              className={`attr-value ${
+                                this.state.selectedAttr[attrIndex].value ===
+                                  elem.value && "selected-attr"
+                              }`}
+                              id={elem.value}
+                              onClick={(e) =>
+                                this.changeAttr(e.target.id, ele.name)
+                              }
+                            >
+                              {elem.value}
                             </button>
                           ))}
                     </div>
@@ -122,7 +165,9 @@ export class ProductPage extends Component {
             {this.state.product.inStock ? (
               <button
                 className="add-btn"
-                onClick={this.props.addToCart}
+                onClick={(e) =>
+                  this.props.addToCart(e, this.state.selectedAttr)
+                }
                 id={this.state.product.id}
               >
                 ADD TO CART

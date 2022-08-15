@@ -8,12 +8,15 @@ export class Cart extends Component {
   constructor(props) {
     super(props);
     this.total = this.total.bind(this);
+    this.nextImage = this.nextImage.bind(this);
+    this.prevImage = this.prevImage.bind(this);
   }
 
   state = {
     cart: this.props.cart,
     totalAmount: [],
     currencySymbol: "$",
+    pic: 0,
   };
 
   componentDidMount() {
@@ -50,6 +53,18 @@ export class Cart extends Component {
       })
     ).then((data) => {
       this.setState({ ...this.state, totalAmount: data });
+    });
+  }
+  nextImage() {
+    this.setState({
+      ...this.state,
+      pic: this.state.pic < 4 ? this.state.pic + 1 : 0,
+    });
+  }
+  prevImage() {
+    this.setState({
+      ...this.state,
+      pic: this.state.pic > 0 ? this.state.pic - 1 : 4,
     });
   }
 
@@ -93,6 +108,11 @@ export class Cart extends Component {
                   return (
                     <>
                       <ProductInCart
+                        cart={
+                          this.props.cart.filter(
+                            (product) => product.id === ele.id
+                          )[0]
+                        }
                         add={this.props.add}
                         remove={this.props.remove}
                         id={ele.id}
@@ -100,9 +120,12 @@ export class Cart extends Component {
                         currency={
                           product.prices[this.props.currency].currency.symbol
                         }
+                        changeCartAttr={this.props.changeCartAttr}
                         price={product.prices[this.props.currency].amount}
                         attr={product.attributes}
-                        image={product.gallery[0]}
+                        image={product.gallery[this.state.pic]}
+                        nextImage={this.nextImage}
+                        prevImage={this.prevImage}
                         amount={ele.amount}
                       />
                       <hr />
@@ -116,9 +139,11 @@ export class Cart extends Component {
           <div>
             <p>Tax 21%:</p>{" "}
             <h3>
-              {this.state.totalAmount
-                .reduce((pre, cur) => pre + cur, 0)
-                .toFixed(2) * 0.21}
+              {(
+                this.state.totalAmount
+                  .reduce((pre, cur) => pre + cur, 0)
+                  .toFixed(2) * 0.21
+              ).toFixed(2)}
             </h3>
           </div>
           <div>
@@ -143,6 +168,7 @@ export class Cart extends Component {
               ).toFixed(2)}
             </h3>
           </div>
+          <button className="check-out">ORDER</button>
         </div>
       </div>
     );
