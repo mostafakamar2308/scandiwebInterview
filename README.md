@@ -33,4 +33,4 @@ This is a website for Scandi Web, made by React JS. I followed the figma design 
 - Using the deprecated Query compoenent of the Apollo Client.
 
 
-### Overall I am very happy of this project which benefited me greatly and I would like to work with Scandi Web
+### Overall I am very happy of this project which benefited me greatly and I would like to work with Scandi Web :heart:	
