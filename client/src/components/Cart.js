@@ -81,6 +81,7 @@ export class Cart extends Component {
           query getProduct {
             product(id: "${ele.id}") {
               name
+              brand
               gallery
               prices {
                 amount
@@ -113,6 +114,7 @@ export class Cart extends Component {
                             (product) => product.id === ele.id
                           )[0]
                         }
+                        brand={product.brand}
                         add={this.props.add}
                         remove={this.props.remove}
                         id={ele.id}

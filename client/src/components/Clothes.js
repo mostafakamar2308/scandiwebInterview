@@ -12,6 +12,7 @@ const GET_CLOTHES_PRODUCTS = gql`
         name
         inStock
         id
+        brand
         gallery
         prices {
           amount
@@ -50,6 +51,7 @@ export class Clothes extends Component {
                 <ProductonDisplay
                   id={product.id}
                   add={this.props.addToCart}
+                  brand={product.brand}
                   title={product.name}
                   inStock={product.inStock}
                   image={product.gallery[0]}

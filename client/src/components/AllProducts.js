@@ -7,7 +7,9 @@ const GET_ALL_PRODUCTS = gql`
   query getAllProducts {
     category(input: { title: "all" }) {
       name
+
       products {
+        brand
         id
         name
         inStock
@@ -49,6 +51,7 @@ export class All extends Component {
               return category.products.map((product) => (
                 <ProductonDisplay
                   id={product.id}
+                  brand={product.brand}
                   add={this.props.addToCart}
                   title={product.name}
                   inStock={product.inStock}

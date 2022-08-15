@@ -11,6 +11,7 @@ const GET_TECH_PRODUCTS = gql`
       products {
         name
         id
+        brand
         inStock
         gallery
         prices {
@@ -50,6 +51,7 @@ export class Tech extends Component {
               return category.products.map((product) => (
                 <ProductonDisplay
                   title={product.name}
+                  brand={product.brand}
                   add={this.props.addToCart}
                   inStock={product.inStock}
                   id={product.id}

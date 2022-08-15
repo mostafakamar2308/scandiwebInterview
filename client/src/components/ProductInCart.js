@@ -29,6 +29,7 @@ export class ProductInCart extends Component {
         <div className="product-info">
           <div>
             <h1 className="product-title">{this.props.name}</h1>
+            <h2 className="product-brand">{this.props.brand}</h2>
             <h3 className="product-price">
               {this.props.currency}
               {this.props.price}

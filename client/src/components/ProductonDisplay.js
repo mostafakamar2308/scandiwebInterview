@@ -19,6 +19,7 @@ export class ProductonDisplay extends Component {
         <div className="product-details" id={this.props.id}>
           <Link to={`/${this.props.id}`}>
             <h2>{this.props.title}</h2>
+            <h2>{this.props.brand}</h2>
             <h4>
               {this.props.currency} {this.props.price}
             </h4>

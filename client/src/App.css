@@ -233,6 +233,11 @@ body {
   font-size: 20px;
   width: 136px;
 }
+.product-brand {
+  font-weight: 300;
+  font-size: 16px;
+  width: 136px;
+}
 .product-price {
   font-weight: 500;
   font-size: 16px;
@@ -363,6 +368,9 @@ a {
   justify-content: space-around;
 }
 .cart-page .product-info .product-title {
+  font-weight: 600;
+}
+.cart-page .product-brand {
   font-weight: 600;
 }
 .cart-page .product-info .product-price {
