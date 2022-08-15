@@ -204,8 +204,8 @@ class App extends Component {
                   cart={this.state.cart}
                   currency={this.state.currency}
                   changeCartDisplay={this.onCartDisplay}
-                  changeCartAttr={this.changeCartAttr}
                   cartDisplay={this.state.cartDisplay}
+                  changeCartAttr={this.changeCartAttr}
                   addToCart={this.addToCart}
                   removeFromCart={this.removeItem}
                 />

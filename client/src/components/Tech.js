@@ -33,6 +33,7 @@ export class Tech extends Component {
             <CartDisplay
               cart={this.props.cart}
               display={this.props.cartDisplay}
+              changeCartAttr={this.props.changeCartAttr}
               changeCartDisplay={this.props.changeCartDisplay}
               add={this.props.addToCart}
               remove={this.props.removeFromCart}

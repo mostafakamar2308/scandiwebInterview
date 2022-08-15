@@ -44,9 +44,6 @@ export class CartDisplay extends Component {
                 {({ loading, error, data }) => {
                   if (loading) return null;
                   if (error) return console.log(error);
-                  console.log(
-                    this.props.cart.filter((product) => product.id === ele.id)
-                  );
                   const { product } = data;
                   return (
                     <>
